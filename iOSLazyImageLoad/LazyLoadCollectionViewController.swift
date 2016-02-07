@@ -33,7 +33,7 @@ class LazyLoadCollectionViewController: UIViewController, UICollectionViewDataSo
     }
     
     func calculateCellWidth() {
-        let width = (kLazyLoadScreenSize - (CGFloat(4.0) * kLazyLoadSpan)) / CGFloat(kLazyLoadColumnsPerRow) - 1
+        let width = (kLazyLoadScreenSize - (CGFloat(kLazyLoadColumnsPerRow + 1.0) * kLazyLoadSpan)) / CGFloat(kLazyLoadColumnsPerRow) - 1
         let height = width * kLazyLoadAspectRatio // square factor: 1
         self.cellSize = CGSize(width: width, height: height)
     }
