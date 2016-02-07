@@ -9,19 +9,27 @@
 /* Begin PBXBuildFile section */
 		666CD2441C66A5CC005F6F67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666CD2431C66A5CC005F6F67 /* AppDelegate.swift */; };
 		666CD2461C66A5CC005F6F67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666CD2451C66A5CC005F6F67 /* ViewController.swift */; };
-		666CD2491C66A5CC005F6F67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666CD2471C66A5CC005F6F67 /* Main.storyboard */; };
 		666CD24B1C66A5CC005F6F67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666CD24A1C66A5CC005F6F67 /* Assets.xcassets */; };
 		666CD24E1C66A5CC005F6F67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666CD24C1C66A5CC005F6F67 /* LaunchScreen.storyboard */; };
+		666CD25B1C66B478005F6F67 /* LazyLoadCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666CD25A1C66B478005F6F67 /* LazyLoadCollectionViewController.swift */; };
+		666CD25E1C66B596005F6F67 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666CD25D1C66B596005F6F67 /* ImageManager.swift */; };
+		6692F2EE1C66BEE2006E184D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6692F2ED1C66BEE2006E184D /* Main.storyboard */; };
+		6692F2F21C66CF13006E184D /* LazyLoadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692F2F11C66CF13006E184D /* LazyLoadTableViewController.swift */; };
+		6692F2F41C66D0EB006E184D /* ImagesAndTextsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6692F2F31C66D0EB006E184D /* ImagesAndTextsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		666CD2401C66A5CC005F6F67 /* iOSLazyImageLoad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSLazyImageLoad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		666CD2431C66A5CC005F6F67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		666CD2451C66A5CC005F6F67 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		666CD2481C66A5CC005F6F67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		666CD24A1C66A5CC005F6F67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		666CD24D1C66A5CC005F6F67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		666CD24F1C66A5CC005F6F67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		666CD25A1C66B478005F6F67 /* LazyLoadCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyLoadCollectionViewController.swift; sourceTree = "<group>"; };
+		666CD25D1C66B596005F6F67 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		6692F2ED1C66BEE2006E184D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		6692F2F11C66CF13006E184D /* LazyLoadTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyLoadTableViewController.swift; sourceTree = "<group>"; };
+		6692F2F31C66D0EB006E184D /* ImagesAndTextsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAndTextsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +62,50 @@
 		666CD2421C66A5CC005F6F67 /* iOSLazyImageLoad */ = {
 			isa = PBXGroup;
 			children = (
-				666CD2431C66A5CC005F6F67 /* AppDelegate.swift */,
-				666CD2451C66A5CC005F6F67 /* ViewController.swift */,
-				666CD2471C66A5CC005F6F67 /* Main.storyboard */,
-				666CD24A1C66A5CC005F6F67 /* Assets.xcassets */,
-				666CD24C1C66A5CC005F6F67 /* LaunchScreen.storyboard */,
-				666CD24F1C66A5CC005F6F67 /* Info.plist */,
+				666CD25C1C66B4C8005F6F67 /* Model */,
+				666CD2571C66B37E005F6F67 /* Storyboards & Views */,
+				666CD2561C66B36B005F6F67 /* App & Resources */,
+				666CD2551C66B363005F6F67 /* View Controllers */,
 			);
 			path = iOSLazyImageLoad;
+			sourceTree = "<group>";
+		};
+		666CD2551C66B363005F6F67 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				666CD2451C66A5CC005F6F67 /* ViewController.swift */,
+				666CD25A1C66B478005F6F67 /* LazyLoadCollectionViewController.swift */,
+				6692F2F11C66CF13006E184D /* LazyLoadTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		666CD2561C66B36B005F6F67 /* App & Resources */ = {
+			isa = PBXGroup;
+			children = (
+				666CD2431C66A5CC005F6F67 /* AppDelegate.swift */,
+				666CD24A1C66A5CC005F6F67 /* Assets.xcassets */,
+				666CD24F1C66A5CC005F6F67 /* Info.plist */,
+			);
+			name = "App & Resources";
+			sourceTree = "<group>";
+		};
+		666CD2571C66B37E005F6F67 /* Storyboards & Views */ = {
+			isa = PBXGroup;
+			children = (
+				6692F2ED1C66BEE2006E184D /* Main.storyboard */,
+				666CD24C1C66A5CC005F6F67 /* LaunchScreen.storyboard */,
+			);
+			name = "Storyboards & Views";
+			sourceTree = "<group>";
+		};
+		666CD25C1C66B4C8005F6F67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				666CD25D1C66B596005F6F67 /* ImageManager.swift */,
+				6692F2F31C66D0EB006E184D /* ImagesAndTextsModel.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,8 +167,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				666CD24E1C66A5CC005F6F67 /* LaunchScreen.storyboard in Resources */,
+				6692F2EE1C66BEE2006E184D /* Main.storyboard in Resources */,
 				666CD24B1C66A5CC005F6F67 /* Assets.xcassets in Resources */,
-				666CD2491C66A5CC005F6F67 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,21 +180,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				666CD2461C66A5CC005F6F67 /* ViewController.swift in Sources */,
+				666CD25E1C66B596005F6F67 /* ImageManager.swift in Sources */,
 				666CD2441C66A5CC005F6F67 /* AppDelegate.swift in Sources */,
+				6692F2F21C66CF13006E184D /* LazyLoadTableViewController.swift in Sources */,
+				6692F2F41C66D0EB006E184D /* ImagesAndTextsModel.swift in Sources */,
+				666CD25B1C66B478005F6F67 /* LazyLoadCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		666CD2471C66A5CC005F6F67 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				666CD2481C66A5CC005F6F67 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		666CD24C1C66A5CC005F6F67 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +324,7 @@
 				666CD2541C66A5CC005F6F67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
