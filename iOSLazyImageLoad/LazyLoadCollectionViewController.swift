@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kLazyLoadScreenSize = UIScreen.mainScreen().bounds.width
+private let kLazyLoadScreenSize = UIScreen.main.bounds.width
 private let kLazyLoadCellImageViewTag = 1
 private let kLazyLoadSpan: CGFloat = 10.0
 private let kLazyLoadAspectRatio: CGFloat = 1.0 // width / height aspect ratio for non square cells.
@@ -18,7 +18,7 @@ class LazyLoadCollectionViewController: UIViewController, UICollectionViewDataSo
     // outlets
     @IBOutlet weak var collectionView: UICollectionView!
     // data
-    var cellSize = CGSizeZero
+    var cellSize = CGSize.zero
     var entries: [String] = []
     
     override func viewDidLoad() {
@@ -40,28 +40,28 @@ class LazyLoadCollectionViewController: UIViewController, UICollectionViewDataSo
     
     // MARK: - UICollectionViewDelegate/DataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return entries.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LazyLoadCollectionViewCell", forIndexPath: indexPath)
-        updateImageForCell(cell, inCollectionView: collectionView, withEntry: entries[indexPath.row], atIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LazyLoadCollectionViewCell", for: indexPath)
+        updateImageForCell(cell, inCollectionView: collectionView, withEntry: entries[(indexPath as NSIndexPath).row], atIndexPath: indexPath)
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return cellSize
     }
     
-    func updateImageForCell(cell: UICollectionViewCell, inCollectionView collectionView: UICollectionView, withEntry: String, atIndexPath indexPath: NSIndexPath) {
+    func updateImageForCell(_ cell: UICollectionViewCell, inCollectionView collectionView: UICollectionView, withEntry: String, atIndexPath indexPath: IndexPath) {
         let imageView = cell.viewWithTag(kLazyLoadCellImageViewTag) as! UIImageView
         imageView.image = kLazyLoadPlaceholderImage
         // load image.
-        let imageURL = entries[indexPath.row]
+        let imageURL = entries[(indexPath as NSIndexPath).row]
         ImageManager.sharedInstance.downloadImageFromURL(imageURL) { (success, image) -> Void in
             if success && image != nil {
-                if collectionView.indexPathForCell(cell)?.row == indexPath.row {
+                if (collectionView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                     imageView.image = image
                 }
             }
@@ -72,20 +72,20 @@ class LazyLoadCollectionViewController: UIViewController, UICollectionViewDataSo
     
     func loadImagesForOnscreenRows() {
         if entries.count > 0 {
-            let visiblePaths = collectionView.indexPathsForVisibleItems()
+            let visiblePaths = collectionView.indexPathsForVisibleItems
             for indexPath in visiblePaths {
-                let entry = entries[indexPath.row]
-                let cell = collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
+                let entry = entries[(indexPath as NSIndexPath).row]
+                let cell = collectionView(self.collectionView, cellForItemAt: indexPath)
                 updateImageForCell(cell, inCollectionView: collectionView, withEntry: entry, atIndexPath: indexPath)
             }
         }
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         loadImagesForOnscreenRows()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate { loadImagesForOnscreenRows() }
     }
 }

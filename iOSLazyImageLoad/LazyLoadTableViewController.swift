@@ -34,33 +34,33 @@ class LazyLoadTableViewController: UIViewController, UITableViewDelegate, UITabl
 
     // MARK: - UITableViewDelegate/DataSource methods
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return texts.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("LazyLoadTableViewCell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LazyLoadTableViewCell", for: indexPath)
         
         // configure cell
         // 1. text
         let textLabel = cell.viewWithTag(kLazyLoadCollectionCellText) as! UILabel
-        textLabel.text = texts[indexPath.row]
+        textLabel.text = texts[(indexPath as NSIndexPath).row]
         
         // 2. image
-        updateImageForCell(cell, inTableView: tableView, withImageURL: images[indexPath.row], atIndexPath: indexPath)
+        updateImageForCell(cell, inTableView: tableView, withImageURL: images[(indexPath as NSIndexPath).row], atIndexPath: indexPath)
         
         return cell
     }
     
-    func updateImageForCell(cell: UITableViewCell, inTableView tableView: UITableView, withImageURL: String, atIndexPath indexPath: NSIndexPath) {
+    func updateImageForCell(_ cell: UITableViewCell, inTableView tableView: UITableView, withImageURL: String, atIndexPath indexPath: IndexPath) {
         // clean image first
         let imageView = cell.viewWithTag(kLazyLoadCollectionCellImage) as! UIImageView
         imageView.image = kLazyLoadPlaceholderImage
         // load image.
-        let imageURL = images[indexPath.row]
+        let imageURL = images[(indexPath as NSIndexPath).row]
         ImageManager.sharedInstance.downloadImageFromURL(imageURL) { (success, image) -> Void in
             if success && image != nil {
-                if tableView.indexPathForCell(cell)?.row == indexPath.row {
+                if (tableView.indexPath(for: cell) as NSIndexPath?)?.row == (indexPath as NSIndexPath).row {
                     imageView.image = image
                 }
             }
@@ -69,10 +69,10 @@ class LazyLoadTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     func loadImagesForOnscreenRows() {
         if texts.count > 0 {
-            let visiblePaths = tableView.indexPathsForVisibleRows ?? [NSIndexPath]()
+            let visiblePaths = tableView.indexPathsForVisibleRows ?? [IndexPath]()
             for indexPath in visiblePaths {
-                let entry = images[indexPath.row]
-                let cell = tableView(self.tableView, cellForRowAtIndexPath: indexPath)
+                let entry = images[(indexPath as NSIndexPath).row]
+                let cell = tableView(self.tableView, cellForRowAt: indexPath)
                 updateImageForCell(cell, inTableView: tableView, withImageURL: entry, atIndexPath: indexPath)
             }
         }
@@ -80,21 +80,21 @@ class LazyLoadTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - When decelerated or ended dragging, we must update visible rows
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         loadImagesForOnscreenRows()
     }
 
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate { loadImagesForOnscreenRows() }
     }
 
     // MARK: - Dynamic row height for table view cells.
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 }
